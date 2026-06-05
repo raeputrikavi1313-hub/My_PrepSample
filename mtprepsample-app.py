@@ -1,90 +1,206 @@
 import streamlit as st
 
-st.set_page_config(page_title="My PrepSample", page_icon="🧪")
-
-st.title("🧪 My PrepSample")
-st.subheader("Aplikasi Preparasi Wadah dan Pengambilan Sampel")
-
-menu = st.sidebar.selectbox(
-    "Pilih Menu",
-    ["Titik Sampling", "Wadah Sampel", "Pengawetan Sampel"]
+st.set_page_config(
+    page_title="My PrepSample",
+    page_icon="🧪",
+    layout="wide"
 )
+
+# ==========================
+# TEMA HIJAU
+# ==========================
+st.markdown("""
+<style>
+
+.stApp {
+    background-color: #F1F8E9;
+}
+
+h1, h2, h3 {
+    color: #2E8B57;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+# ==========================
+# HEADER
+# ==========================
+st.markdown("""
+<h1 style='text-align:center;'>
+🌿 My PrepSample
+</h1>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<h3 style='text-align:center;'>
+Sistem Informasi Preparasi Wadah dan Pengambilan Sampel Lingkungan
+</h3>
+""", unsafe_allow_html=True)
+
+st.image(
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e",
+    use_container_width=True
+)
+
+st.success(
+    "Aplikasi untuk membantu menentukan titik sampling, jenis wadah sampel, dan pengawetan sampel lingkungan."
+)
+
+st.markdown("---")
+
+# ==========================
+# MENU UTAMA
+# ==========================
+st.markdown("## 📋 Menu Utama")
+
+menu = st.radio(
+    "",
+    [
+        "📍 Penentuan Titik Sampling",
+        "🧴 Jenis Wadah Sampel",
+        "❄️ Pengawetan Sampel"
+    ],
+    horizontal=True
+)
+
+st.markdown("---")
 
 # ==========================
 # TITIK SAMPLING
 # ==========================
-if menu == "Titik Sampling":
+if menu == "📍 Penentuan Titik Sampling":
 
-    st.header("Penentuan Titik Sampling")
+    st.header("📍 Penentuan Titik Sampling")
 
     lokasi = st.selectbox(
         "Pilih Lokasi Sampling",
-        ["Danau", "Sungai", "Waduk", "Air Limbah Industri"]
+        [
+            "Danau",
+            "Sungai",
+            "Waduk",
+            "Air Limbah Industri"
+        ]
     )
 
     if lokasi == "Danau":
-        st.success("Pola sampling yang disarankan: Zig-zag atau beberapa titik representatif.")
-        st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Lake_map.svg/512px-Lake_map.svg.png")
+
+        st.image(
+            "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+            width=700
+        )
+
+        st.success(
+            "Metode yang disarankan: Pola zig-zag atau beberapa titik representatif pada area danau."
+        )
 
     elif lokasi == "Sungai":
-        st.success("Pola sampling yang disarankan: Hulu - Tengah - Hilir.")
+
+        st.image(
+            "https://images.unsplash.com/photo-1437482078695-73f5ca6c96e2",
+            width=700
+        )
+
+        st.success(
+            "Metode yang disarankan: Hulu - Tengah - Hilir."
+        )
 
     elif lokasi == "Waduk":
-        st.success("Pola sampling yang disarankan: Beberapa titik pada permukaan dan kedalaman tertentu.")
+
+        st.image(
+            "https://images.unsplash.com/photo-1500375592092-40eb2168fd21",
+            width=700
+        )
+
+        st.success(
+            "Metode yang disarankan: Beberapa titik permukaan dan kedalaman."
+        )
 
     elif lokasi == "Air Limbah Industri":
-        st.success("Pola sampling yang disarankan: Pada outlet IPAL atau saluran pembuangan.")
+
+        st.image(
+            "https://images.unsplash.com/photo-1569163139394-de44cb5894a9",
+            width=700
+        )
+
+        st.success(
+            "Metode yang disarankan: Titik inlet dan outlet IPAL."
+        )
 
 # ==========================
 # WADAH SAMPEL
 # ==========================
-elif menu == "Wadah Sampel":
+elif menu == "🧴 Jenis Wadah Sampel":
 
-    st.header("Jenis Wadah Sampel")
-
-    parameter = st.selectbox(
-        "Pilih Parameter",
-        ["pH", "BOD", "COD", "Logam Berat", "Minyak dan Lemak"]
-    )
-
-    if parameter == "pH":
-        st.info("Wadah: Botol plastik atau kaca.")
-
-    elif parameter == "BOD":
-        st.info("Wadah: Botol plastik atau kaca gelap.")
-
-    elif parameter == "COD":
-        st.info("Wadah: Botol kaca atau plastik.")
-
-    elif parameter == "Logam Berat":
-        st.info("Wadah: Botol plastik PE atau HDPE.")
-
-    elif parameter == "Minyak dan Lemak":
-        st.info("Wadah: Botol kaca.")
-
-# ==========================
-# PENGAWETAN
-# ==========================
-elif menu == "Pengawetan Sampel":
-
-    st.header("Bahan Pengawet Sampel")
+    st.header("🧴 Jenis Wadah Sampel")
 
     parameter = st.selectbox(
         "Pilih Parameter",
-        ["BOD", "COD", "Logam Berat", "Amonia", "Minyak dan Lemak"]
+        [
+            "pH",
+            "BOD",
+            "COD",
+            "TSS",
+            "Logam Berat",
+            "Minyak dan Lemak",
+            "Amonia"
+        ]
     )
 
-    if parameter == "BOD":
-        st.warning("Pengawetan: Simpan pada suhu ≤ 4°C.")
+    data_wadah = {
+        "pH": "Botol plastik atau kaca",
+        "BOD": "Botol kaca/plastik gelap",
+        "COD": "Botol plastik atau kaca",
+        "TSS": "Botol plastik",
+        "Logam Berat": "Botol HDPE",
+        "Minyak dan Lemak": "Botol kaca",
+        "Amonia": "Botol plastik"
+    }
 
-    elif parameter == "COD":
-        st.warning("Pengawetan: H2SO4 hingga pH < 2.")
+    st.info(data_wadah[parameter])
 
-    elif parameter == "Logam Berat":
-        st.warning("Pengawetan: HNO3 hingga pH < 2.")
+# ==========================
+# PENGAWETAN SAMPEL
+# ==========================
+elif menu == "❄️ Pengawetan Sampel":
 
-    elif parameter == "Amonia":
-        st.warning("Pengawetan: H2SO4 hingga pH < 2 dan simpan dingin.")
+    st.header("❄️ Pengawetan Sampel")
 
-    elif parameter == "Minyak dan Lemak":
-        st.warning("Pengawetan: Simpan pada suhu ≤ 4°C.")
+    parameter = st.selectbox(
+        "Pilih Parameter",
+        [
+            "BOD",
+            "COD",
+            "TSS",
+            "Logam Berat",
+            "Minyak dan Lemak",
+            "Amonia"
+        ]
+    )
+
+    data_pengawet = {
+        "BOD": "Simpan pada suhu ≤ 4°C",
+        "COD": "Tambahkan H₂SO₄ hingga pH < 2",
+        "TSS": "Simpan pada suhu ≤ 4°C",
+        "Logam Berat": "Tambahkan HNO₃ hingga pH < 2",
+        "Minyak dan Lemak": "Simpan pada suhu ≤ 4°C",
+        "Amonia": "Tambahkan H₂SO₄ hingga pH < 2"
+    }
+
+    st.warning(data_pengawet[parameter])
+
+# ==========================
+# FOOTER
+# ==========================
+st.markdown("---")
+
+st.markdown("""
+<div style='text-align:center;'>
+
+🌿 <b>My PrepSample</b><br>
+Program Studi Pengelolaan Limbah Industri<br>
+Akademi Kimia Analis Bogor
+
+</div>
+""", unsafe_allow_html=True)
+ 
